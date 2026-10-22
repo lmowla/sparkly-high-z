@@ -1,0 +1,47 @@
+# Site settings. Edit the text values; keep the keys.
+title: Sparkly
+tagline: Star clusters in galaxies across redshift
+description: >-
+  A monthly online meeting series connecting JWST observations of star clusters
+  at high redshift with local globular clusters, galaxy scaling relations,
+  and simulations and theories of cluster formation.
+url: https://lmowla.github.io
+baseurl: /sparkly-high-z
+
+# Appearance (GitHub Pages builds this with the Minima theme; no local install needed)
+theme: minima
+minima:
+  skin: classic
+  date_format: "%-d %B %Y"
+
+# Navigation order
+header_pages:
+  - about.md
+  - organizers.md
+  - meetings.md
+  - join.md
+
+# Each file in _meetings/ becomes one meeting page.
+# future: true is needed so that upcoming meetings (dated in the future) are built.
+future: true
+collections:
+  meetings:
+    output: true
+    permalink: /meetings/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: meetings
+    values:
+      layout: meeting
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

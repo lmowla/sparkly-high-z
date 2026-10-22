@@ -1,0 +1,42 @@
+---
+layout: default
+---
+<article class="post h-entry" itemscope itemtype="http://schema.org/Event">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="startDate">
+        {{ page.date | date: site.minima.date_format }}, {{ page.date | date: "%H:%M" }} UTC
+      </time>
+      {%- if page.speaker and page.speaker != "" -%}
+        &nbsp;&bull;&nbsp;
+        <span itemprop="performer">{{ page.speaker | escape }}</span>
+        {%- if page.affiliation and page.affiliation != "" %} ({{ page.affiliation | escape }}){% endif -%}
+      {%- endif -%}
+      {%- if page.status and page.status != "" -%}
+        &nbsp;&bull;&nbsp;<span class="meeting-status">{{ page.status | capitalize }}</span>
+      {%- endif -%}
+    </p>
+    {%- assign has_links = false -%}
+    {%- if page.zoom and page.zoom != "" -%}{%- assign has_links = true -%}{%- endif -%}
+    {%- if page.recording and page.recording != "" -%}{%- assign has_links = true -%}{%- endif -%}
+    {%- if page.slides and page.slides != "" -%}{%- assign has_links = true -%}{%- endif -%}
+    {%- if has_links -%}
+    <p class="post-meta">
+      {%- if page.zoom and page.zoom != "" %}<a href="{{ page.zoom }}">Zoom</a>{% endif -%}
+      {%- if page.recording and page.recording != "" %} <a href="{{ page.recording }}">Recording</a>{% endif -%}
+      {%- if page.slides and page.slides != "" %} <a href="{{ page.slides }}">Slides</a>{% endif -%}
+    </p>
+    {%- else -%}
+    <p class="post-meta">The Zoom link is sent to the mailing list; see <a href="{{ '/join/' | relative_url }}">Join</a>.</p>
+    {%- endif -%}
+  </header>
+
+  <div class="post-content e-content" itemprop="description">
+    {{ content }}
+  </div>
+
+  <p><a href="{{ '/meetings/' | relative_url }}">&larr; All meetings</a></p>
+
+</article>
